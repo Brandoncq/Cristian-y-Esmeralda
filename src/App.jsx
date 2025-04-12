@@ -32,7 +32,7 @@ function App() {
       url,
     };
 
-    const nuevosEnlaces = [...enlaces, nuevoEnlace];
+    const nuevosEnlaces = [nuevoEnlace,...enlaces];
     setEnlaces(nuevosEnlaces);
     localStorage.setItem("invitaciones", JSON.stringify(nuevosEnlaces));
 
@@ -117,10 +117,15 @@ function App() {
                 <>
                   <hr className="h-px my-1 bg-gray-400 border-0" />
                   <li key={index} className="p-3 bg-gray-50 rounded">
-                    <div className="font-medium">
-                      {item.nombre} - {item.personas}
+                    <div className="flex flex-col justify-start items-start text-sm">
+                      <span>Invitado 1: <span className="font-medium">{item.nombre}</span></span>
+                      {item.nombre2 && (
+                        <span>Invitado 2: <span className="font-medium">{item.nombre2}</span></span>
+                      )}
+                      <span>Número de pases: <span className="font-medium">{item.personas}</span></span>
                     </div>
-                    <div className="flex items-center mt-1">
+                    <div className="flex text-sm items-center mt-1">
+                      <span className="mr-1">Enlace:</span>
                       <a
                         href={item.url}
                         target="_blank"
@@ -129,10 +134,19 @@ function App() {
                       >
                         {item.url}
                       </a>
+                    </div>
+                    <div className="flex justify-end mt-2">
+
                       <button
                         onClick={() => copiarPortapapeles(item.url, index)}
-                        className="ml-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-2 py-1 rounded transition-colors cursor-pointer"
+                        className="ml-2 bg-red-200 hover:bg-red-300 text-gray-800 text-xs px-2 py-1 rounded transition-colors cursor-pointer"
                       >
+                        Eliminar
+                      </button>
+                      <button
+                        onClick={() => copiarPortapapeles(item.url, index)}
+                        className="ml-2 bg-green-200 hover:bg-green-300 text-gray-800 text-xs px-2 py-1 rounded transition-colors cursor-pointer"
+                        >
                         {copiado === index ? "✓ Copiado" : "Copiar"}
                       </button>
                     </div>
