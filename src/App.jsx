@@ -41,6 +41,12 @@ function App() {
     setPersonas("");
   };
 
+  const eliminarEnlace = (index) => {
+    const nuevosEnlaces = enlaces.filter((_, i) => i !== index);
+    setEnlaces(nuevosEnlaces);
+    localStorage.setItem("invitaciones", JSON.stringify(nuevosEnlaces));
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center">
@@ -109,9 +115,14 @@ function App() {
 
         {enlaces.length > 0 && (
           <div className="mt-6">
-            <h3 className="font-semibold mb-2 text-center text-lg">
-              ENLACES GENERADOS:
+            <div className="flex flex-col justify-center items-center mb-2">  
+            <h3 className="font-semibold text-center text-lg">
+              ENLACES GENERADOS
             </h3>
+            <span className="self-start text-sm">
+              Total de enlaces generados: {enlaces.length}
+            </span>
+            </div>
             <ul className="space-y-3">
               {enlaces.map((item, index) => (
                 <>
@@ -138,7 +149,7 @@ function App() {
                     <div className="flex justify-end mt-2">
 
                       <button
-                        onClick={() => copiarPortapapeles(item.url, index)}
+                        onClick={() => eliminarEnlace(index)}
                         className="ml-2 bg-red-200 hover:bg-red-300 text-gray-800 text-xs px-2 py-1 rounded transition-colors cursor-pointer"
                       >
                         Eliminar
