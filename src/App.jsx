@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [nombre, setNombre] = useState("");
+  const [nombre2, setNombre2] = useState("");
   const [personas, setPersonas] = useState("");
   const [enlaces, setEnlaces] = useState([]);
   const [copiado, setCopiado] = useState(null);
@@ -19,11 +20,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nombre || !personas) return;
+    if ((!nombre && !nombre2) || !personas) return;
 
-    const url = `https://cristian-y-esmeralda.pages.dev/invitacion?nombre=${encodeURIComponent(
-      nombre
-    )}&personas=${encodeURIComponent(personas)}`;
+    const url = `https://cristian-y-esmeralda.pages.dev/${encodeURIComponent(
+      personas
+    )}/${encodeURIComponent(nombre)}/${encodeURIComponent(nombre2)}`;
 
     const nuevoEnlace = {
       nombre,
@@ -36,6 +37,7 @@ function App() {
     localStorage.setItem("invitaciones", JSON.stringify(nuevosEnlaces));
 
     setNombre("");
+    setNombre2("");
     setPersonas("");
   };
 
@@ -43,21 +45,40 @@ function App() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center">
         <h2 className="text-xl font-medium mb-1">Añade tus Invitados</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          Favor de NO usar símbolos o emojis
-        </p>
-
+        <div className="flex flex-col mb-4">
+          <p className="text-sm text-gray-500">
+            Favor de NO usar símbolos o emojis
+          </p>
+          <p className="text-sm text-gray-500">
+            Si solo desea agregar un invitado, deje el segundo campo vacío
+          </p>
+        </div>
         <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-1">
+          <span className="text-start  text-gray-600">Nombre del Invitado 1:</span>
           <input
             type="text"
-            placeholder="María Isabel"
+            placeholder="Ejemplo: Cristian Fernandez"
+            value={nombre2}
+            onChange={(e) => setNombre2(e.target.value)}
+            className="w-full mb-3 border border-gray-400 rounded px-3 py-2 outline-none focus:border-[#78be8f]"
+          />
+          </div>
+          <div className="flex flex-col gap-1">
+          <span className="text-start  text-gray-600">Nombre del Invitado 2:</span>
+          <input
+            type="text"
+            placeholder="Ejemplo: Giselle Garcia"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             className="w-full mb-3 border border-gray-400 rounded px-3 py-2 outline-none focus:border-[#78be8f]"
           />
+          </div>
+          <div className="flex flex-col gap-1">
+          <span className="text-start  text-gray-600">Número de pases:</span>
           <input
             type="text"
-            placeholder="2 personas"
+            placeholder="Ejemplo: 2"
             value={personas}
             onChange={(e) => {
               const value = e.target.value;
@@ -77,11 +98,12 @@ function App() {
             }}
             className="w-full mb-4 border border-gray-400 rounded px-3 py-2 outline-none focus:border-[#78be8f]"
           />
+          </div>
           <button
             type="submit"
-            className="bg-[#78be8f] hover:bg-[#ffea75] hover:text-black text-white px-4 py-2 rounded transition-colors duration-300 ease-in-out cursor-pointer w-full"
+            className="bg-[#53a06d] hover:bg-[#ffea75] hover:text-black text-white px-4 py-2 rounded transition-colors duration-300 ease-in-out cursor-pointer w-full"
           >
-            Generar
+            Generar enlace
           </button>
         </form>
 
