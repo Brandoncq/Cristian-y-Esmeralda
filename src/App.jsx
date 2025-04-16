@@ -28,6 +28,7 @@ function App() {
 
     const nuevoEnlace = {
       nombre,
+      nombre2,
       personas,
       url,
     };
@@ -65,8 +66,8 @@ function App() {
           <input
             type="text"
             placeholder="Ejemplo: Cristian Fernandez"
-            value={nombre2}
-            onChange={(e) => setNombre2(e.target.value)}
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
             className="w-full mb-3 border border-gray-400 rounded px-3 py-2 outline-none focus:border-[#78be8f]"
           />
           </div>
@@ -75,8 +76,8 @@ function App() {
           <input
             type="text"
             placeholder="Ejemplo: Giselle Garcia"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            value={nombre2}
+            onChange={(e) => setNombre2(e.target.value)}
             className="w-full mb-3 border border-gray-400 rounded px-3 py-2 outline-none focus:border-[#78be8f]"
           />
           </div>
