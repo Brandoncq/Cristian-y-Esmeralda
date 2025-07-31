@@ -94,7 +94,7 @@ function App() {
                 return;
               }
               const num = Number(value);
-              if (Number.isInteger(num) && num > 1) {
+              if (Number.isInteger(num) && num >= 1) {
                 setPersonas(value);
               }
             }}
