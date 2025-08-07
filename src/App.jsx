@@ -22,7 +22,7 @@ function App() {
     e.preventDefault();
     if ((!nombre && !nombre2) || !personas) return;
 
-    const url = `https://cristian-y-esmeralda.pages.dev/${encodeURIComponent(
+    const url = `https://cristian-esmeralda.pages.dev/${encodeURIComponent(
       personas
     )}/${encodeURIComponent(nombre)}/${encodeURIComponent(nombre2)}`;
 
